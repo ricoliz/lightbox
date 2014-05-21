@@ -1,37 +1,53 @@
 <!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>lightbox at home</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript">
-        $("#modalBtn").live("click", function(){
-            $("#mask").css("display", "block");
-            $("#modal").css("display", "block");
-        });
+	<meta charset="UTF-8">
+	<title>lightbox</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+		    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>")
 
-        $("#mask").live("click", function(){
-            $(this).css("display", "none");
-            $("#modal").css("display", "none");
-        });
-        $("#modal .closeBtn").live("click", function(){
-            $("#mask").css("display", "none");
-            $("#modal").css("display", "none");
-        });
-    </script>
+		    $("#glayLayer").click(function(){
+		        $(this).hide()
+		        $("#overLayer").hide()
+		    })
+
+		    $("a.modal").click(function(){
+		        $("#glayLayer").show()
+		        $("#overLayer").show().html("<img src='"+$(this).attr("href")+"' />")
+		        return false;
+		    })
+
+		    if($.browser.msie && $.browser.version<7){
+		        $(window).scroll(function(){
+		            $("#glayLayer").css('top',$(document).scrollTop())
+		            $("#overLayer").css('top',($(document).scrollTop()+$(window).height()/2) +"px")
+		        })
+		    }
+
+		})
+	</script>
 </head>
 <body>
-    <div id="wrapper">
-        <input id="modalBtn" type="button" value="push">
-        <div id="mask"></div>
-        <div id="modal">
-            <ul>
-                <li><img src="images/photo01.jpg" alt=""></li>
-                <li><img src="images/photo02.jpg" alt=""></li>
-            </ul>
-            <p class="closeBtn">閉じる</p>
-        </div>
-    </div>
+	<div id="wrapper">
+		<h1>jQueryを利用したモーダルウィンドウの作成</h1>
+
+		<div id="float_box">
+			<ul>
+				<li><a href="images/photo01.jpg" class="modal"><img src="images/photo01_thum.jpg" alt="シャンデリア" /></a></li>
+				<li><a href="images/photo02.jpg" class="modal"><img src="images/photo02_thum.jpg" alt="バラ" /></a></li>
+				<li><a href="images/photo03.jpg" class="modal"><img src="images/photo03_thum.jpg" alt="海" /></a></li>
+				<li><a href="images/photo04.jpg" class="modal"><img src="images/photo04_thum.jpg" alt="門" /></a></li>
+				<li><a href="images/photo05.jpg" class="modal"><img src="images/photo05_thum.jpg" alt="海" /></a></li>
+				<li><a href="images/photo16.jpg" class="modal"><img src="images/photo16_thum.jpg" alt="あじさい" /></a></li>
+				<li><a href="images/photo17.jpg" class="modal"><img src="images/photo17_thum.jpg" alt="空" /></a></li>
+				<li><a href="images/photo18.jpg" class="modal"><img src="images/photo18_thum.jpg" alt="建物" /></a></li>
+			</ul>
+		</div>
+		<div id="glayLayer"></div>
+		<div id="overLayer"><img src="images/photo05.jpg" /></div>
+	</div>
 </body>
 </html>
