@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>lightbox at home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        $("#modalBtn").live("click", function(){
+            $("#mask").css("display", "block");
+            $("#modal").css("display", "block");
+        });
+
+        $("#mask").live("click", function(){
+            $(this).css("display", "none");
+            $("#modal").css("display", "none");
+        });
+        $("#modal .closeBtn").live("click", function(){
+            $("#mask").css("display", "none");
+            $("#modal").css("display", "none");
+        });
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <input id="modalBtn" type="button" value="push">
+        <div id="mask"></div>
+        <div id="modal">
+            <ul>
+                <li><img src="images/photo01.jpg" alt=""></li>
+                <li><img src="images/photo02.jpg" alt=""></li>
+            </ul>
+            <p class="closeBtn">閉じる</p>
+        </div>
+    </div>
+</body>
+</html>
