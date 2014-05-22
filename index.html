@@ -12,20 +12,39 @@
 		    $("#glayLayer").click(function(){
 		        $(this).hide()
 		        $("#overLayer").hide()
-		    })
+		    });
 
 		    $("a.modal").click(function(){
 		        $("#glayLayer").show()
 		        $("#overLayer").show().html("<img src='"+$(this).attr("href")+"' />")
 		        return false;
-		    })
+		    });
+			// 高さと横幅をとる
+			var w_width = $(window).width();
+			var w_height = $(window).height();
+			console.log("w_widthは", w_width);
+			// modalwindowを中心にする　each　にすることで複数あったときにも対応
+			$('#overLayer').each(function(){
+					// modalの高さと横幅をとる
+					var m_width = $('#overLayer').outerWidth();
+					var m_height = $('#overLayer').outerHeight();
+					console.log("m_widthは", m_width);
+					console.log("m_heightは", m_height);
+					// 中心にするための計算
+					var top = (w_height - m_height)/2;
+					var left = (w_width - m_width)/2;
+					// ↑で計算した新しい値をcssに適用する
+					$(this).css({'top' : top, 'left' : left});
+					console.log("top and left", top, left);
+			});
 
-		    if($.browser.msie && $.browser.version<7){
-		        $(window).scroll(function(){
-		            $("#glayLayer").css('top',$(document).scrollTop())
-		            $("#overLayer").css('top',($(document).scrollTop()+$(window).height()/2) +"px")
-		        })
-		    }
+
+		    // if($.browser.msie && $.browser.version<7){
+		    //     $(window).scroll(function(){
+		    //         $("#glayLayer").css('top',$(document).scrollTop())
+		    //         $("#overLayer").css('top',($(document).scrollTop()+$(window).height()/2) +"px")
+		    //     })
+		    // }
 
 		})
 	</script>
@@ -44,10 +63,14 @@
 				<li><a href="images/photo16.jpg" class="modal"><img src="images/photo16_thum.jpg" alt="あじさい" /></a></li>
 				<li><a href="images/photo17.jpg" class="modal"><img src="images/photo17_thum.jpg" alt="空" /></a></li>
 				<li><a href="images/photo18.jpg" class="modal"><img src="images/photo18_thum.jpg" alt="建物" /></a></li>
+<!-- 				<li><a href="images/photo10_1000.jpg" class="modal"><img src="images/photo10_s.jpg" alt="建物" /></a></li>
+				<li><a href="images/photo11_800.jpg" class="modal"><img src="images/photo11_s.jpg" alt="建物" /></a></li> -->
 			</ul>
 		</div>
-		<div id="glayLayer"></div>
-		<div id="overLayer"><img src="images/photo05.jpg" /></div>
+		<div id ="wrapper2">
+			<div id="glayLayer"></div>
+			<div id="overLayer"><img src="images/photo05.jpg" /></div>
+		</div>
 	</div>
 </body>
 </html>
