@@ -15,15 +15,14 @@
 	        $("#overLayer").hide()
 	        // alert("glaylayerとoverlayerかくす");
 	    });
-
+	    // 初期化
+      var m_width = 0;
+      var m_height = 0;
+      var top = 0;
+      var left = 0;
 	    $("a.modal").click(function(){
 	        $("#glayLayer").show()
 	        $("#overLayer").html("<img src='"+$(this).attr("href")+"' />")
-	        // 初期化
-	        var m_width = 0;
-	        var m_height = 0;
-	        var top = 0;
-	        var left = 0;
 					// modalの高さと横幅をとる
 					m_width = $('#overLayer').outerWidth();
 					m_height = $('#overLayer').outerHeight();
