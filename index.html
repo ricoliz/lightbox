@@ -5,70 +5,47 @@
 	<title>lightbox</title>
 	<link rel="stylesheet" href="css/style.css">
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-</head>
-<body>
-	<div id="wrapper">
-		<h1>jQueryを利用したモーダルウィンドウの作成</h1>
-
-		<div id="float_box">
-			<ul>
-				<li><a href="images/photo01.jpg" class="modal"><img src="images/photo01_thum.jpg" alt="シャンデリア" /></a></li>
-				<li><a href="images/photo02.jpg" class="modal"><img src="images/photo02_thum.jpg" alt="バラ" /></a></li>
-				<li><a href="images/photo03.jpg" class="modal"><img src="images/photo03_thum.jpg" alt="海" /></a></li>
-				<li><a href="images/photo04.jpg" class="modal"><img src="images/photo04_thum.jpg" alt="門" /></a></li>
-				<li><a href="images/photo05.jpg" class="modal"><img src="images/photo05_thum.jpg" alt="海" /></a></li>
-				<li><a href="images/photo16.jpg" class="modal"><img src="images/photo16_thum.jpg" alt="あじさい" /></a></li>
-				<li><a href="images/photo17.jpg" class="modal"><img src="images/photo17_thum.jpg" alt="空" /></a></li>
-				<li><a href="images/photo18.jpg" class="modal"><img src="images/photo18_thum.jpg" alt="建物" /></a></li>
-				<li><a href="images/photo10_600.jpg" class="modal"><img src="images/photo10_thum.jpg" alt="建物" /></a></li>
-				<li><a href="images/photo11_800.jpg" class="modal"><img src="images/photo11_thum.jpg" alt="建物" /></a></li>
-			</ul>
-		</div>
-			<div id="glayLayer"></div>
-			<div id="overLayer">
-				<img class="imgs" src="images/photo11.jpg" />
-			</div>
-	</div>
 	<script type="text/javascript">
-		$(function(){
+		$(window).load(function(){
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>")
+	    // alert("bodyappendした");
 
 	    $("#glayLayer").click(function(){
 	        $(this).hide()
 	        $("#overLayer").hide()
+	        // alert("glaylayerとoverlayerかくす");
 	    });
 
 	    $("a.modal").click(function(){
 	        $("#glayLayer").show()
-	        $("#overLayer").show().html("<img src='"+$(this).attr("href")+"' />")
+	        $("#overLayer").html("<img src='"+$(this).attr("href")+"' />")
+	        // 初期化
+	        var m_width = 0;
+	        var m_height = 0;
+	        var top = 0;
+	        var left = 0;
+					// modalの高さと横幅をとる
+					m_width = $('#overLayer').outerWidth();
+					m_height = $('#overLayer').outerHeight();
+					console.log("m_widthは", m_width);
+					console.log("m_heightは", m_height);
+					// 中心にするための計算
+					top = (w_height - m_height)/2;
+					left = (w_width - m_width)/2;
+					// ↑で計算した新しい値をcssに適用する
+					$('#overLayer').css({'top' : top, 'left' : left});
+					console.log("top and left", top, left);
+					// alert("overlayer数値");
+	        $("#overLayer").show();
+	        // alert("glaylayerとoverlayerみせる");
 	        return false;
 	    });
-      // var target = document.getElementById('overLayer');
-      // alert('width:' +target.width +'\n' +'height:' +target.height);
 
 			// 高さと横幅をとる
 			var w_width = $(window).width();
 			var w_height = $(window).height();
 			console.log("w_widthは", w_width);
 			console.log("w_heightは", w_height);
-			// modalwindowを中心にする　each　にすることで複数あったときにも対応
-			$('#overLayer').each(function(){
-					// modalの高さと横幅をとる
-					var m_width = $(this).outerWidth();
-					var m_height = $(this).outerHeight();
-					console.log("m_widthは", m_width);
-					console.log("m_heightは", m_height);
-
-
-					// 中心にするための計算
-					var top = (w_height - m_height)/2;
-					var left = (w_width - m_width)/2;
-
-					// ↑で計算した新しい値をcssに適用する
-					$(this).css({'top' : top, 'left' : left});
-					console.log("top and left", top, left);
-			});
-
 
 				// IE対策
 		    // if($.browser.msie && $.browser.version<7){
@@ -78,7 +55,37 @@
 		    //     })
 		    // }
 
-		})
+		});
+// modalwindowを中心にする　each　にすることで複数あったときにも対応
+	// $('#overLayer').each(function(){
+
+	// });
 	</script>
+</head>
+<body>
+	<div id="wrapper">
+		<h1>jQueryを利用したモーダルウィンドウの作成</h1>
+
+		<div id="float_box">
+			<ul>
+				<li><a href="images/photo01.jpg" class="modal"><img src="images/photo01_thum.jpg" alt="シャンデリア" /></a></li>
+				<li><a href="images/photo02.jpg" width="400px" height="300px" class="modal"><img src="images/photo02_thum.jpg" alt="バラ" width="100px" height="75px" /></a></li>
+				<li><a href="images/photo03.jpg" width="400px" height="300px" class="modal"><img src="images/photo03_thum.jpg" alt="海" width="100px" height="75px" /></a></li>
+				<li><a href="images/photo04.jpg" width="400px" height="300px" class="modal"><img src="images/photo04_thum.jpg" alt="門" width="100px" height="75px" /></a></li>
+				<li><a href="images/photo05.jpg" width="400px" height="300px" class="modal"><img src="images/photo05_thum.jpg" alt="海" width="100px" height="75px" /></a></li>
+				<li><a href="images/photo16.jpg" width="400px" height="300px" class="modal"><img src="images/photo16_thum.jpg" alt="あじさい" width="100px" height="75px" /></a></li>
+				<li><a href="images/photo17.jpg" width="400px" height="300px" class="modal"><img src="images/photo17_thum.jpg" alt="空" width="100px" height="71px" /></a></li>
+				<li><a href="images/photo18.jpg" width="400px" height="300px" class="modal"><img src="images/photo18_thum.jpg" alt="建物" width="100px" height="71px" /></a></li>
+				<li><a href="images/photo10_600.jpg" width="600px" height="428px" class="modal"><img src="images/photo10_thum.jpg" width="100px" height="71px" alt="建物" /></a></li>
+				<li><a href="images/photo11_800.jpg" width="800px" height="571px" class="modal"><img src="images/photo11_thum.jpg" width="100px" height="71px" alt="建物" /></a></li>
+			</ul>
+		</div>
+			<!-- 上にかかるもや -->
+			<div id="glayLayer"></div>
+			<!-- 写真などを置くはこ -->
+			<div id="overLayer">
+				<img class="imgs" src="images/photo11.jpg" />
+			</div>
+	</div>
 </body>
 </html>
