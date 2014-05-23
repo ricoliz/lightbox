@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
-		$(window).load(function(){
+		$(window).on("load", function(){
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>")
 	    // alert("bodyappendした");
 
@@ -21,8 +21,6 @@
       var top = 0;
       var left = 0;
 	    $("a.modal").click(function(){
-	        $("#glayLayer").show()
-	        $("#overLayer").html("<img src='"+$(this).attr("href")+"' />")
 					// modalの高さと横幅をとる
 					m_width = $('#overLayer').outerWidth();
 					m_height = $('#overLayer').outerHeight();
@@ -35,6 +33,8 @@
 					$('#overLayer').css({'top' : top, 'left' : left});
 					console.log("top and left", top, left);
 					// alert("overlayer数値");
+					$("#glayLayer").show()
+					$("#overLayer").html("<img src='"+$(this).attr("href")+"' />")
 	        $("#overLayer").show();
 	        // alert("glaylayerとoverlayerみせる");
 	        return false;
