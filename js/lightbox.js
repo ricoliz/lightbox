@@ -3,8 +3,8 @@ $(window).on("load", function(){
   // alert("bodyappendした");
 
   $("#glayLayer").click(function(){
-      $(this).hide()
-      $("#overLayer").hide()
+      $(this).hide();
+      $("#overLayer").hide();
       // alert("glaylayerとoverlayerかくす");
   });
   // 初期化
@@ -25,8 +25,8 @@ $(window).on("load", function(){
       $('#overLayer').css({'top' : top, 'left' : left});
       console.log("top and left", top, left);
       // alert("overlayer数値");
-      $("#glayLayer").show()
-      $("#overLayer").html("<img src='"+$(this).attr("href")+"' />")
+      $("#glayLayer").show();
+      $("#overLayer").html("<img src='"+$(this).attr("href")+"' />");
       $("#overLayer").show();
       // alert("glaylayerとoverlayerみせる");
       return false;
